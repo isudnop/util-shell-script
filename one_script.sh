@@ -74,6 +74,12 @@ sudo pip install psutil thefuck
 output_green "### Install htop ###"
 sudo apt-get -y install htop
 
+output_green "### Install NodeJs ###"
+sudo apt-get -y install nodejs
+
+output_green "### Install VIM ###"
+sudo apt-get -y install vim
+
 output_green "### Install Docker ###"
 sudo apt-get -y install \
     apt-transport-https \
@@ -91,6 +97,3 @@ sudo apt-get -y install docker-ce
 output_green "### Install Docker Compose 1.16.0 ###"
 sudo curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-
-output_green "### Install NodeJs ###"
-sudo apt-get -y install nodejs
