@@ -28,14 +28,14 @@ sudo apt-get update
 
 output_green "### Install zsh ###"
 sudo apt-get -qy install terminator
-sudo apt-get -y install zsh
+sudo apt-get -qy install zsh
 sudo chsh -s $(which zsh)
 output_green "### Install CURL & Oh My Zsh! ###"
 sudo apt-get -y install curl wget
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 output_green "### Install PHP ###"
-sudo apt-get -y install php \
+sudo apt-get -qy install php \
     php-mysql \
     php-soap \
     php-mbstring \
@@ -44,6 +44,8 @@ sudo apt-get -y install php \
     php-cli \
     php-xml \
     php-zip \
+    php-tokenizer \
+    php-pdo \
 
 output_green "### Install Composer ###"
 EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
@@ -97,3 +99,7 @@ sudo apt-get -y install docker-ce
 output_green "### Install Docker Compose 1.16.0 ###"
 sudo curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+output_red "### If docker-compose install commad not work , try sudo -i "
+output_red " $ curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-\`uname -s\`-\`uname -m\` > /usr/local/bin/docker-compose"
+output_red " $ chmod +x /usr/local/bin/docker-compose "
+output_red " $ exit "
