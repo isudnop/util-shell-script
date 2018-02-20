@@ -5,7 +5,7 @@ output_green () {
     green=`tput setaf 2`
     reset=`tput sgr0`
     word=$1
-    
+
     echo $green $word $reset
 }
 
@@ -13,7 +13,7 @@ output_red () {
     red=`tput setaf 1`
     reset=`tput sgr0`
     word=$1
-    
+
     echo $red $word $reset
 }
 
@@ -21,6 +21,7 @@ output_green "### One Script Shall Install Them All ###"
 output_green "### Start Add PPA and do upgrade first###"
 sudo apt-get update
 sudo add-apt-repository ppa:ondrej/php -y
+sudo add-apt-repository ppa:webupd8team/java -y
 ##sudo apt-get -y upgrade
 
 output_green "### Update ###"
@@ -67,8 +68,8 @@ echo $RESULT
 output_green "### Install GIT ###"
 sudo apt-get -y install git
 
-output_green "### Install python ###"
-sudo apt-get -y install python-pip python-dev
+output_green "### Install python & python3 ###"
+sudo apt-get -y install python-pip python-dev python3-pip python3-dev
 
 output_green "### Install thefuck ###"
 sudo pip install psutil thefuck
@@ -103,3 +104,10 @@ output_red "### If docker-compose install commad not work , try sudo -i "
 output_red " $ curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-\`uname -s\`-\`uname -m\` > /usr/local/bin/docker-compose"
 output_red " $ chmod +x /usr/local/bin/docker-compose "
 output_red " $ exit "
+
+output_green "### Install JAVA 8 ###"
+echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
+sudo apt-get install -y oracle-java8-installer
+
+output_green "### Install Angular CLI ###"
+sudo npm install -g @angular/cli
