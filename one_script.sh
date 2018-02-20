@@ -69,7 +69,10 @@ echo_green "### Install GIT ###"
 sudo apt-get -y install git
 
 echo_green "### Install python & python3 ###"
-sudo apt-get -y install python-pip python-dev python3-pip python3-dev
+sudo apt-get -y install python-pip python-dev python3-pip python3-dev python-software-properties
+
+echo_green "### Install debconf-utils ###"
+sudo apt-get -y install debconf-utils
 
 echo_green "### Install thefuck ###"
 sudo pip install psutil thefuck
@@ -82,6 +85,13 @@ sudo apt-get -y install nodejs
 
 echo_green "### Install VIM ###"
 sudo apt-get -y install vim
+
+echo_green "### Install JAVA 8 ###"
+echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
+sudo apt-get install -y oracle-java8-installer
+
+echo_green "### Install Angular CLI ###"
+sudo npm install -g @angular/cli
 
 echo_green "### Install Docker ###"
 sudo apt-get -y install \
@@ -96,13 +106,6 @@ sudo add-apt-repository \
    stable"
 sudo apt-get update
 sudo apt-get -y install docker-ce
-
-echo_green "### Install JAVA 8 ###"
-echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
-sudo apt-get install -y oracle-java8-installer
-
-echo_green "### Install Angular CLI ###"
-sudo npm install -g @angular/cli
 
 echo_green "### Install Docker Compose 1.16.0 ###"
 sudo curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
