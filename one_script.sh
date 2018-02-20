@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###output function
-output_green () {
+echo_green () {
     green=`tput setaf 2`
     reset=`tput sgr0`
     word=$1
@@ -9,7 +9,7 @@ output_green () {
     echo $green $word $reset
 }
 
-output_red () {
+echo_red () {
     red=`tput setaf 1`
     reset=`tput sgr0`
     word=$1
@@ -17,25 +17,25 @@ output_red () {
     echo $red $word $reset
 }
 
-output_green "### One Script Shall Install Them All ###"
-output_green "### Start Add PPA and do upgrade first###"
+echo_green "### One Script Shall Install Them All ###"
+echo_green "### Start Add PPA and do upgrade first###"
 sudo apt-get update
 sudo add-apt-repository ppa:ondrej/php -y
 sudo add-apt-repository ppa:webupd8team/java -y
 ##sudo apt-get -y upgrade
 
-output_green "### Update ###"
+echo_green "### Update ###"
 sudo apt-get update
 
-output_green "### Install zsh ###"
+echo_green "### Install zsh ###"
 sudo apt-get -qy install terminator
 sudo apt-get -qy install zsh
 sudo chsh -s $(which zsh)
-output_green "### Install CURL & Oh My Zsh! ###"
+echo_green "### Install CURL & Oh My Zsh! ###"
 sudo apt-get -y install curl wget
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-output_green "### Install PHP ###"
+echo_green "### Install PHP ###"
 sudo apt-get -qy install php \
     php-mysql \
     php-soap \
@@ -48,14 +48,14 @@ sudo apt-get -qy install php \
     php-tokenizer \
     php-pdo \
 
-output_green "### Install Composer ###"
+echo_green "### Install Composer ###"
 EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
 
 if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
 then
-    >&2 output_red "ERROR: Invalid installer signature"
+    >&2 echo_red "ERROR: Invalid installer signature"
     rm composer-setup.php
     echo 1
 fi
@@ -65,25 +65,25 @@ RESULT=$?
 rm composer-setup.php
 echo $RESULT
 
-output_green "### Install GIT ###"
+echo_green "### Install GIT ###"
 sudo apt-get -y install git
 
-output_green "### Install python & python3 ###"
+echo_green "### Install python & python3 ###"
 sudo apt-get -y install python-pip python-dev python3-pip python3-dev
 
-output_green "### Install thefuck ###"
+echo_green "### Install thefuck ###"
 sudo pip install psutil thefuck
 
-output_green "### Install htop ###"
+echo_green "### Install htop ###"
 sudo apt-get -y install htop
 
-output_green "### Install NodeJs ###"
+echo_green "### Install NodeJs ###"
 sudo apt-get -y install nodejs
 
-output_green "### Install VIM ###"
+echo_green "### Install VIM ###"
 sudo apt-get -y install vim
 
-output_green "### Install Docker ###"
+echo_green "### Install Docker ###"
 sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
@@ -97,17 +97,17 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get -y install docker-ce
 
-output_green "### Install Docker Compose 1.16.0 ###"
-sudo curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-output_red "### If docker-compose install commad not work , try sudo -i "
-output_red " $ curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-\`uname -s\`-\`uname -m\` > /usr/local/bin/docker-compose"
-output_red " $ chmod +x /usr/local/bin/docker-compose "
-output_red " $ exit "
-
-output_green "### Install JAVA 8 ###"
+echo_green "### Install JAVA 8 ###"
 echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
 sudo apt-get install -y oracle-java8-installer
 
-output_green "### Install Angular CLI ###"
+echo_green "### Install Angular CLI ###"
 sudo npm install -g @angular/cli
+
+echo_green "### Install Docker Compose 1.16.0 ###"
+sudo curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+echo_red "### If docker-compose install commad not work , try sudo -i "
+echo_red " $ curl -L https://github.com/docker/compose/releases/download/1.16.0-rc1/docker-compose-\`uname -s\`-\`uname -m\` > /usr/local/bin/docker-compose"
+echo_red " $ chmod +x /usr/local/bin/docker-compose "
+echo_red " $ exit "
